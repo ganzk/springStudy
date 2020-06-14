@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c">
+
+    <context:component-scan base-package="com.ditest.*"></context:component-scan>
+
+    <!-- 依赖注入 -->
+
+    <!--<bean id="diDao" class="com.ditest.dao.DIDao"></bean>-->
+
+    <!-- 构造函数注入  只有在注入属性值的时候才会有type -->
+    <!--<bean id="diService" class="com.ditest.service.DIService">-->
+        <!--<constructor-arg name="diDao" type="com.ditest.dao.DIDao" ref="diDao"></constructor-arg>-->
+    <!--</bean>-->
+
+    <!-- set方法注入 -->
+    <!--<bean id="diService1" class="com.ditest.service.DIService">-->
+        <!--<property name="diDao" ref="diDao"></property>-->
+    <!--</bean>-->
+
+    <!-- 内部bean注入-->
+    <!--<bean id="diService2" class="com.ditest.service.DIService">-->
+        <!--<constructor-arg>-->
+            <!--<bean id="diDao" class="com.ditest.dao.DIDao"></bean>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+
+    <!-- p命名空间注入 本质是set方法 是set方法的一种优化 -->
+    <!--<bean id="diService3" class="com.ditest.service.DIService" p:diDao-ref="diDao"/>-->
+
+    <!-- c命名空间注入 本质是构造函数 是构造函数的一种优化 -->
+    <!--<bean id="diService4" class="com.ditest.service.DIService" c:diDao-ref="diDao"/>-->
+
+    <!-- 自动装配（根据名字） 原理是set方法 -->
+    <!--<bean id = "diService5" class="com.ditest.service.DIService" autowire="byName"></bean>-->
+
+    <!-- 自动装配（根据类型） 原理是set方法 如果使⽤了根据类型来⾃动装配，
+         那么在IOC容器中只能 有⼀个 这样的类型，否则就会报错！-->
+    <!--<bean id = "diService6" class="com.ditest.service.DIService" autowire="byType"></bean>-->
+
+    <bean id = "diService7" class="com.ditest.service.DIService"></bean>
+
+
+</beans>

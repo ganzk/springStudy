@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--AOP-->
+
+    <context:component-scan base-package="com.aoptest.*"></context:component-scan>
+
+    <!--静态工厂-->
+    <!--<bean id="proxyFactory" class="com.aoptest.ProxyFactory" factory-method="getProxyInstance">-->
+        <!--<constructor-arg name="aop_" ref="AOP"></constructor-arg>-->
+        <!--<constructor-arg name="target_" ref="aopDao"></constructor-arg>-->
+    <!--</bean>-->
+
+    <!--非静态工厂-->
+    <bean id="proxyFactroy" class="com.aoptest.ProxyFactory"></bean>
+    <bean id="aop" class="com.aoptest.dao.IAop" factory-bean="proxyFactroy" factory-method="getProxyInstanceFactroy">
+        <constructor-arg name="aop_" ref="AOP"></constructor-arg>
+        <constructor-arg name="target_" ref="aopDao"></constructor-arg>
+    </bean>
+
+</beans>

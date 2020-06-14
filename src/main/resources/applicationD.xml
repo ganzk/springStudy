@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--注解方式-->
+    <!--<context:component-scan base-package="com.aspectj.*"></context:component-scan>-->
+    <!--开启AOP注解-->
+    <!--<aop:aspectj-autoproxy></aop:aspectj-autoproxy>-->
+
+    <!--XML方式-->
+    <bean id="userDao" class="com.aspectj.dao.UserDao"></bean>
+    <bean id="personDao" class="com.aspectj.dao.PersonDao"></bean>
+
+    <!--切面类-->
+    <bean id="aop" class="com.aspectj.aspect.AspectJXml"></bean>
+
+    <aop:config>
+        <!--定义切入表达式，拦截哪些方法 可以筛选拦截的方法-->
+        <aop:pointcut id="pointCut" expression="execution(* com.aspectj.dao.*.*(..))"></aop:pointcut>
+        <aop:pointcut id="pointCutSet" expression="execution(* com.aspectj.dao.*.set*(..))"></aop:pointcut>
+        <aop:pointcut id="pointCutPrivate" expression="execution(private * com.aspectj.dao.*.*(..))"></aop:pointcut>
+        <aop:pointcut id="pointCutPublic" expression="execution(public * com.aspectj.dao.*.*(..))"></aop:pointcut>
+
+        <!--指定切面类是哪一个-->
+        <aop:aspect ref="aop">
+            <!--指定拦截的方法和指定切点表达式-->
+            <aop:before method="begin" pointcut-ref="pointCutSet"></aop:before>
+            <aop:after method="end" pointcut-ref="pointCut"></aop:after>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

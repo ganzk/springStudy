@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 控制反转 -->
+
+    <context:component-scan base-package="com.track.*"></context:component-scan>
+
+    <!--<bean id="anntionScon" class="com.AnnotationScan"></bean>-->
+
+
+    <!--xml非静态工厂创建对象-->
+    <!--首先创建工厂对象-->
+    <bean id="factory" class="Factory"></bean>
+    <!--用工厂对象来创建对象-->
+    <bean id="userDoFac" factory-bean="factory" factory-method="getUser"></bean>
+
+    <!--xml静态工厂创建对象-->
+    <bean id="userDo" class="Factory" factory-method="getuserDo"></bean>
+
+    <!--xml直接创建对象-->
+    <bean id="user" class="com.track.domain.UserDo">
+        <constructor-arg type="java.lang.String" value="张三"></constructor-arg>
+        <constructor-arg type="java.lang.Integer" value="16"></constructor-arg>
+    </bean>
+
+</beans>
