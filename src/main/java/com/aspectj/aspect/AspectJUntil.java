@@ -2,6 +2,7 @@ package com.aspectj.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
+@Order(1)
 public class AspectJUntil {
 
     //指定切入点表达式，拦截哪个类的那个方法 111

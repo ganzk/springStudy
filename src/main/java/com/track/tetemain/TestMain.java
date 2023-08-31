@@ -1,5 +1,6 @@
 package com.track.tetemain;
 
+import com.task.dao.LoginDao;
 import com.track.controller.UserController;
 import com.track.domain.UserDo;
 import org.springframework.context.ApplicationContext;
@@ -31,6 +32,10 @@ public class TestMain {
         //注解方式
         UserController userController = (UserController)applicationContext.getBean("userController");
         userController.save();
+
+        // @Configuration方式
+        LoginDao loginDao = (LoginDao) applicationContext.getBean("getLoginDao");
+        loginDao.save();
 
 
 
